@@ -56,6 +56,10 @@ module Uinput
         @file.ioctl(UI_SET_EVBIT, (event.is_a? Symbol) ? LinuxInput.const_get(event) : event)
       end
 
+      def add_relative(value)
+        @file.ioctl(UI_SET_RELBIT, (value.is_a? Symbol) ? LinuxInput.const_get(value) : value)
+      end
+
       def create
         if @file.ioctl(UI_DEV_CREATE).zero?
           @file
